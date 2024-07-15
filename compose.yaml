@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: backer-link
-    container_name: backer-link-container
+    container_name: {{project-name}}-container
     volumes:
       - ./:/myproject
     working_dir: /myproject
