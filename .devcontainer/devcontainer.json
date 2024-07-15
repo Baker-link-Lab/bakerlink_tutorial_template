@@ -1,0 +1,19 @@
+{
+    "name": "rust",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "rust",
+    "workspaceFolder": "/myproject",
+    "remoteEnv": {
+        "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "serayuzgur.crates",
+                "probe-rs.probe-rs-debugger",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    }
+}
