@@ -18,11 +18,11 @@ pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_GENERIC_03H;
 const XTAL_FREQ_HZ: u32 = 12_000_000u32;
 
 type GreenLedPin =
-    hal::gpio::Pin<hal::gpio::bank0::Gpio22, hal::gpio::FunctionSioOutput, hal::gpio::PullNone>;
+    hal::gpio::Pin<hal::gpio::bank0::Gpio22, hal::gpio::FunctionSioOutput, hal::gpio::PullDown>;
 type RedLedPin =
-    hal::gpio::Pin<hal::gpio::bank0::Gpio20, hal::gpio::FunctionSioOutput, hal::gpio::PullNone>;
+    hal::gpio::Pin<hal::gpio::bank0::Gpio20, hal::gpio::FunctionSioOutput, hal::gpio::PullDown>;
 type OrangeLedPin =
-    hal::gpio::Pin<hal::gpio::bank0::Gpio21, hal::gpio::FunctionSioOutput, hal::gpio::PullNone>;
+    hal::gpio::Pin<hal::gpio::bank0::Gpio21, hal::gpio::FunctionSioOutput, hal::gpio::PullDown>;
 type ButtonPin =
     hal::gpio::Pin<hal::gpio::bank0::Gpio23, hal::gpio::FunctionSioInput, hal::gpio::PullUp>;
 type DelayTimer = hal::Timer;
@@ -61,13 +61,13 @@ fn main() -> ! {
     );
 
     // LED:GPIO22(Green), GPIO21(orange), GPIO20(RED)
-    let green_led = pins.gpio22.reconfigure();
-    let orange_led = pins.gpio21.reconfigure();
-    let mut red_led = pins.gpio20.reconfigure();
+    let green_led = pins.gpio22.into_push_pull_output();
+    let orange_led = pins.gpio21.into_push_pull_output();
+    let mut red_led = pins.gpio20.into_push_pull_output();
     red_led.set_high().unwrap();
 
     // Button:GPIO23
-    let button = pins.gpio23.reconfigure();
+    let button = pins.gpio23.into_pull_up_input();
     button.set_interrupt_enabled(hal::gpio::Interrupt::EdgeLow, true);
 
     critical_section::with(|cs| {
