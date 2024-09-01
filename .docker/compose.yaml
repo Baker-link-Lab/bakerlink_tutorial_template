@@ -3,10 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: backer-link
-    container_name: {{project-name}}-container
+    image: "Baker-link-Env"
+    container_name: "{{project-name}}-container"
     volumes:
-      - ../:/myproject
-    working_dir: /myproject
+      - "../:/{{project-name}}"
+    working_dir: /{{project-name}}
     command: /bin/sh
     tty: true
