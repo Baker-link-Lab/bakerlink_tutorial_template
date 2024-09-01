@@ -19,10 +19,10 @@ critical-section = "1.0.0"
 # cargo build/run
 [profile.dev]
 codegen-units = 1
-debug = 2
+debug = true
 debug-assertions = true
 incremental = false
-opt-level = 3
+opt-level = 0
 overflow-checks = true
 
 # cargo build/run --release
