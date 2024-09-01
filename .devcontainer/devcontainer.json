@@ -1,6 +1,6 @@
 {
     "name": "rust",
-    "dockerComposeFile": "../compose.yaml",
+    "dockerComposeFile": "../.docker/compose.yaml",
     "service": "rust",
     "workspaceFolder": "/myproject",
     "remoteEnv": {

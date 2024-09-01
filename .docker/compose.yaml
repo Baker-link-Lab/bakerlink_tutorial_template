@@ -6,7 +6,7 @@ services:
     image: backer-link
     container_name: {{project-name}}-container
     volumes:
-      - ./:/myproject
+      - ../:/myproject
     working_dir: /myproject
     command: /bin/sh
     tty: true
