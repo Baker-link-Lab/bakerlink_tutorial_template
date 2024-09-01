@@ -10,9 +10,9 @@
         "vscode": {
             "extensions": [
                 "rust-lang.rust-analyzer",
-                "serayuzgur.crates",
                 "probe-rs.probe-rs-debugger",
-                "tamasfe.even-better-toml"
+                "tamasfe.even-better-toml",
+                "fill-labs.dependi"
             ]
         }
     }
