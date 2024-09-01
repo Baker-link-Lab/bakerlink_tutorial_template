@@ -1,4 +1,3 @@
-// traffic_light.rs
 #![no_std]
 #![no_main]
 
