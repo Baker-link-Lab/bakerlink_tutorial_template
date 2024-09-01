@@ -1,5 +1,5 @@
 {
-    "name": "rust",
+    "name": "{{project-name}}",
     "dockerComposeFile": "../.docker/compose.yaml",
     "service": "rust",
     "workspaceFolder": "/{{project-name}}",
