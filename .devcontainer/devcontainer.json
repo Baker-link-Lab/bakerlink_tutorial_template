@@ -1,7 +1,7 @@
 {
     "name": "{{project-name}}",
     "dockerComposeFile": "../.docker/compose.yaml",
-    "service": "rust",
+    "service": "{{project-name}}",
     "workspaceFolder": "/{{project-name}}",
     "remoteEnv": {
         "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"

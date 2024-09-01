@@ -1,5 +1,5 @@
 services:
-  rust:
+  {{project-name}}:
     build:
       context: .
       dockerfile: Dockerfile
