@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: "baker_link_env"
+    image: "{{project-name}}-container"
     container_name: "{{project-name}}-container"
     volumes:
       - "../:/{{project-name}}"
