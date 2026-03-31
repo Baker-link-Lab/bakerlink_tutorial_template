@@ -3,7 +3,7 @@
 // Embassy非同期フレームワークを使ったLED点滅の基本例です。
 // async/awaitにより、ブロッキングなしでタイマーを待機できます。
 //
-// 実行方法: cargo run --example embassy_blinky --features embassy
+// 実行方法: cargo run --no-default-features --features embassy --example embassy_blinky
 
 #![no_std]
 #![no_main]

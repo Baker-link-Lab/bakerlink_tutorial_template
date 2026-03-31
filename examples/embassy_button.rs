@@ -9,7 +9,7 @@
 //   - GPIO20: Red LED
 //   - GPIO23: Button（プルアップ、押すとLOW）
 //
-// 実行方法: cargo run --example embassy_button --features embassy
+// 実行方法: cargo run --no-default-features --features embassy --example embassy_button
 
 #![no_std]
 #![no_main]

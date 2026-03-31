@@ -17,9 +17,6 @@ use hal::pac;
 
 use embedded_hal::delay::DelayNs;
 
-// rp2040-hal のADCは embedded-hal 0.2 の OneShot トレイトを使用
-use embedded_hal_0_2::adc::OneShot;
-
 #[link_section = ".boot2"]
 #[used]
 pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_GENERIC_03H;
@@ -77,7 +74,12 @@ fn main() -> ! {
         // 整数演算で近似: temp_mC = 27000 - (voltage_uV - 706000) * 1000 / 1721
         let temp_voltage_uv = (temp_value as i32) * 3_300_000 / 4096;
         let temp_mc = 27_000 - (temp_voltage_uv - 706_000) * 1000 / 1721;
-        info!("Temperature: {}.{} deg C (raw={})", temp_mc / 1000, (temp_mc % 1000) / 100, temp_value);
+        info!(
+            "Temperature: {}.{} deg C (raw={})",
+            temp_mc / 1000,
+            (temp_mc % 1000) / 100,
+            temp_value
+        );
 
         timer.delay_ms(1000);
     }
