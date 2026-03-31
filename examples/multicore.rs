@@ -98,10 +98,7 @@ fn main() -> ! {
     let cores = mc.cores();
     let core1 = &mut cores[1];
     core1
-        .spawn(
-            CORE1_STACK.take().unwrap(),
-            core1_task,
-        )
+        .spawn(CORE1_STACK.take().unwrap(), core1_task)
         .unwrap();
 
     // Core1に開始シグナルを送信
