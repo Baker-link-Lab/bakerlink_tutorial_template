@@ -1,7 +1,7 @@
-FROM rust:1.86.0-bullseye
+FROM rust:1.94.1-bookworm
 
 RUN rustup target install thumbv6m-none-eabi
-RUN cargo install flip-link --version 0.1.10
+RUN cargo install flip-link --version 0.1.12
 RUN rustup component add rustfmt
 RUN rustup component add llvm-tools
 RUN cargo install cargo-binutils

@@ -8,7 +8,7 @@
 //   - red_led_task:   GPIO20の赤LEDを2秒間隔で点滅
 //   - logger_task:    5秒ごとにステータスをログ出力
 //
-// 実行方法: cargo run --example embassy_multitask --features embassy
+// 実行方法: cargo run --no-default-features --features embassy --example embassy_multitask
 
 #![no_std]
 #![no_main]

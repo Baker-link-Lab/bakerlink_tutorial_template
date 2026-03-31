@@ -27,7 +27,7 @@ pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_GENERIC_03H;
 const XTAL_FREQ_HZ: u32 = 12_000_000u32;
 
 // Core1用のスタック領域
-static mut CORE1_STACK: Stack<4096> = Stack::new();
+static CORE1_STACK: Stack<4096> = Stack::new();
 
 // Core1で実行される関数
 fn core1_task() {
@@ -99,7 +99,7 @@ fn main() -> ! {
     let core1 = &mut cores[1];
     core1
         .spawn(
-            unsafe { &mut *core::ptr::addr_of_mut!(CORE1_STACK.mem) },
+            CORE1_STACK.take().unwrap(),
             core1_task,
         )
         .unwrap();
