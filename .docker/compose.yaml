@@ -1,5 +1,8 @@
 services:
   {{project-name}}:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: "ghcr.io/baker-link-lab/bakerlink-env:latest"
     container_name: "{{project-name}}-container"
     volumes:
