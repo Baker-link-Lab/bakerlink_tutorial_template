@@ -1,6 +1,6 @@
 services:
   {{project-name}}:
-    image: "bakerlinklab/bakerlink-env:latest"
+    image: "ghcr.io/baker-link-lab/bakerlink-env:latest"
     container_name: "{{project-name}}-container"
     volumes:
       - "../:/{{project-name}}"
