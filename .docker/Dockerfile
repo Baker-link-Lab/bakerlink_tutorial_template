@@ -1,5 +1,6 @@
 FROM rust:1.86.0-bullseye
 
+RUN apt-get update && apt-get install -y libudev-dev pkg-config && rm -rf /var/lib/apt/lists/*
 RUN rustup target install thumbv6m-none-eabi
 RUN cargo install flip-link --version 0.1.10
 RUN rustup component add rustfmt
