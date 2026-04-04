@@ -20,12 +20,12 @@
                     "rttEnabled": true,
                 }
             ],
-             "pathMappings": [
-                 {
-                     "remoteRoot": "/myproject",
-                     "localRoot": "${env:LOCAL_WORKSPACE_FOLDER}"
-                 }
-             ],
+            "pathMappings": [
+                {
+                    "remoteRoot": "{{project-name}}",
+                    "localRoot": "${env:LOCAL_WORKSPACE_FOLDER}"
+                }
+            ],
             "env": {
                 "RUST_LOG": "info"
             },
