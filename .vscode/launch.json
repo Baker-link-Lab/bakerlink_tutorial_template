@@ -16,10 +16,16 @@
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "${env:LOCAL_WORKSPACE_FOLDER}/target/thumbv6m-none-eabi/debug/{{project-name}}",
+                    "programBinary": "{{project-name}}/target/thumbv6m-none-eabi/debug/{{project-name}}",
                     "rttEnabled": true,
                 }
             ],
+             "pathMappings": [
+                 {
+                     "remoteRoot": "/myproject",
+                     "localRoot": "${env:LOCAL_WORKSPACE_FOLDER}"
+                 }
+             ],
             "env": {
                 "RUST_LOG": "info"
             },
