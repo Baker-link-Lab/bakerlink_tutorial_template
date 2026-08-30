@@ -3,9 +3,8 @@
     "dockerComposeFile": "../.docker/compose.yaml",
     "service": "{{project-name}}",
     "workspaceFolder": "/{{project-name}}",
-    "remoteEnv": {
-        "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
-    },
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
     "customizations": {
         "vscode": {
             "extensions": [

@@ -4,9 +4,9 @@ services:
       context: .
       dockerfile: Dockerfile
     image: "ghcr.io/baker-link-lab/bakerlink-env:latest"
-    container_name: "{{project-name}}-container"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - "../:/{{project-name}}"
     working_dir: /{{project-name}}
-    command: /bin/sh
-    tty: true
+    command: sleep infinity
