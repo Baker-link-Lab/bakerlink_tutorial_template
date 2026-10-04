@@ -38,7 +38,17 @@ curl \
     -H "X-Content-SHA256: $checksum" \
     -H "Content-Type: application/octet-stream" \
     --upload-file "$elf" \
-    "$url/v1/artifacts/{{project-name}}/debug"
+    "$url/v1/artifacts/{{project-name}}/debug" || {
+    status=$?
+    echo >&2
+    if [ "$status" -eq 7 ]; then
+        echo "Cannot connect to Baker Link ELF upload server at $url." >&2
+        echo "Start Baker Link Env on the host (Run or --headless). Bind IP must be reachable from this container (e.g. 0.0.0.0, not 127.0.0.1)." >&2
+    else
+        echo "ELF upload to $url failed (curl exit $status). See the error above and the Baker Link Env log." >&2
+    fi
+    exit "$status"
+}
 
 echo
 echo "ELF uploaded to Baker Link Env."
