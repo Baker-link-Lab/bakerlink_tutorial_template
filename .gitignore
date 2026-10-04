@@ -12,6 +12,3 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
-
-# Baker Link Env writes a per-installation upload token here.
-.bakerlink/connection.json

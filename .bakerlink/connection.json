@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "uploadUrl": "http://host.docker.internal:50002",
+  "dapServer": "host.docker.internal:50001"
+}
