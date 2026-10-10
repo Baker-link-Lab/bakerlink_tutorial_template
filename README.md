@@ -17,17 +17,23 @@ Start Baker Link Env on the host with **Run**, then press **F5**. The
 `cargo: build` pre-launch task builds the ELF; the extension uploads it with
 SHA-256 verification before connecting to the host DAP server.
 
-- `.bakerlink/connection.json` is the source of truth for DAP and upload endpoints.
 - `.vscode/launch.json` uses `type: "baker-link-debug"`,
+  `bakerLink.dapServer` and `bakerLink.uploadUrl` for host endpoints,
   `bakerLink.elf` for the container-side file, and
   `programBinary: "bakerlink://<project>/debug"` for the host artifact.
 - Run **Baker Link: Check Host Connection** to check TCP reachability.
+  Select the debug configuration if the project has multiple configurations.
   It does not check USB probe readiness.
-- The shell upload tasks remain available for manual use or the official
-  probe-rs extension. To use that extension instead, change `type` to
-  `"probe-rs-debug"`, remove `bakerLink`, set `server` to the DAP endpoint,
-  keep `remoteServerMode: false`, and use
-  `"preLaunchTask": "baker-link: prepare debug"`.
+- **Baker Link: Open Connection Settings** opens `.vscode/launch.json`.
+- Requires extension version 0.1.1 or newer. `.bakerlink` is no longer needed;
+  ELF upload is handled entirely by the extension, without `jq`, `curl`, or a
+  project-local script. DAP and upload endpoints default to
+  `host.docker.internal:50001` and `http://host.docker.internal:50002` when omitted.
+
+For an existing project, copy non-default endpoints from
+`.bakerlink/connection.json` into the `bakerLink` object in `.vscode/launch.json`,
+switch `preLaunchTask` to a build-only task, remove shell-upload tasks, then
+delete `.bakerlink`. The new extension does not read the old connection file.
 
 For release/example builds, update both the build task and `bakerLink.elf`,
 and use a matching artifact profile/identifier. The MVP uploads one artifact

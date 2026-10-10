@@ -7,6 +7,8 @@
             "request": "launch",
             "name": "Baker Link: Debug",
             "bakerLink": {
+                "dapServer": "host.docker.internal:50001",
+                "uploadUrl": "http://host.docker.internal:50002",
                 "elf": "${workspaceFolder}/target/thumbv6m-none-eabi/debug/{{project-name}}"
             },
             "remoteServerMode": false,
