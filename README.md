@@ -6,12 +6,16 @@ Baker link.シリーズ用の組込みRustプロジェクトテンプレート�
 
 ## Baker Link Env VS Code extension
 
-This template uses the development version of
-[Baker Link Env](https://github.com/Baker-link-Lab/baker-link-env-vscode).
-The extension is not yet published to the Marketplace. Build its VSIX with
-`npm ci && npm run package` in that repository, reopen this project in its
-Dev Container, and use **Extensions: Install from VSIX...** to install the VSIX
-in the container (not just on the host).
+This template automatically installs
+[Baker Link Env](https://marketplace.visualstudio.com/items?itemName=baker-link-lab.baker-link-env)
+from the VS Code Marketplace inside the Dev Container via
+`.devcontainer/devcontainer.json`. No manual VSIX installation is required.
+Wait for the extension installation to finish before debugging.
+
+For an existing container, run **Dev Containers: Rebuild Container** after
+updating the configuration, or install `baker-link-lab.baker-link-env` manually
+from the Extensions view in the Dev Container window. Verify it is installed
+in the container, not only on the host. Requires VS Code >= 1.116.0.
 
 Start Baker Link Env on the host with **Run**, then press **F5**. The
 `cargo: build` pre-launch task builds the ELF; the extension uploads it with

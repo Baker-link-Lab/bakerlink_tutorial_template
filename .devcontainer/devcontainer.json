@@ -9,6 +9,7 @@
         "vscode": {
             "extensions": [
                 "rust-lang.rust-analyzer",
+                "baker-link-lab.baker-link-env",
                 "tamasfe.even-better-toml",
                 "fill-labs.dependi"
             ]
