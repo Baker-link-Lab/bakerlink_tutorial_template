@@ -2,11 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "baker-link: prepare debug",
-            "type": "probe-rs-debug",
+            "preLaunchTask": "cargo: build",
+            "type": "baker-link-debug",
             "request": "launch",
-            "name": "probe_rs Server attach example",
-            "server": "${config:bakerLink.dapServer}",
+            "name": "Baker Link: Debug",
+            "bakerLink": {
+                "elf": "${workspaceFolder}/target/thumbv6m-none-eabi/debug/{{project-name}}"
+            },
             "remoteServerMode": false,
             "speed": 4000,
             "chip": "RP2040",
