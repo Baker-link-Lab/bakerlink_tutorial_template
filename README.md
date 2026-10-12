@@ -43,5 +43,41 @@ For release/example builds, update both the build task and `bakerLink.elf`,
 and use a matching artifact profile/identifier. The MVP uploads one artifact
 per launch session. There is no host start/stop API or automatic host startup.
 Both host services are unauthenticated; use only trusted networks and firewall
-rules. On Linux, the Compose configuration supplies
-`host.docker.internal:host-gateway`.
+rules.
+
+## Cross-platform host connection
+
+The debug endpoints stay the same on Windows, macOS, and Debian:
+`host.docker.internal:50001` and `http://host.docker.internal:50002`.
+The base `.docker/compose.yaml` must not override this host name.
+`.devcontainer/devcontainer.json` also loads `.docker/compose.host.yaml`
+(JSON is valid YAML).
+
+Opening through Baker Link Env configures this override for the active Docker
+engine. On Rancher Desktop / Docker Desktop it leaves `extra_hosts` empty so
+the runtime's native DNS reaches the Windows/macOS/Linux host. On local,
+rootful Docker Engine on Debian/Linux it adds the `host-gateway` mapping.
+Rootless, remote native Docker engines and Windows containers are not supported
+by automatic setup.
+
+If opening directly in VS Code without Baker Link Env, use the shipped empty
+override for Desktop runtimes. For local, rootful Docker Engine on Linux, set:
+
+```json
+{
+    "services": {
+        "{{project-name}}": {
+            "extra_hosts": {
+                "host.docker.internal": "host-gateway"
+            }
+        }
+    }
+}
+```
+
+After changing hosts or Docker runtimes, reopen through Baker Link Env (or
+update the override manually), then run **Dev Containers: Rebuild Container**.
+An existing container retains its old hosts mapping until recreated.
+Start both host services with **Run** in Baker Link Env, using Bind IP
+`0.0.0.0`, then run **Baker Link: Check Host Connection** in the container.
+Allow the host ports through the firewall only for trusted networks.

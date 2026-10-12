@@ -1,6 +1,9 @@
 {
     "name": "{{project-name}}",
-    "dockerComposeFile": "../.docker/compose.yaml",
+    "dockerComposeFile": [
+        "../.docker/compose.yaml",
+        "../.docker/compose.host.yaml"
+    ],
     "service": "{{project-name}}",
     "workspaceFolder": "/{{project-name}}",
     "remoteUser": "vscode",

@@ -1,0 +1,7 @@
+{
+    "services": {
+        "{{project-name}}": {
+            "extra_hosts": {}
+        }
+    }
+}
