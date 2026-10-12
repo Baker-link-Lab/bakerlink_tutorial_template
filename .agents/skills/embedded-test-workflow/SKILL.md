@@ -1,6 +1,6 @@
 ---
 name: embedded-test-workflow
-description: "Design, add, build, and run tests for no_std embedded Rust firmware, including host-testable logic and on-device embedded-test/probe-rs tests. Use when writing firmware tests, investigating test failures, or deciding what can be verified without hardware."
+description: "Design and verify no_std embedded Rust tests with Baker Link Env Agent tools: execute host tests, build embedded-test ELF files, and distinguish compilation/debug launch from on-device test results. Use when writing firmware tests, selecting host targets, or diagnosing test failures."
 ---
 
 # Embedded Test Workflow
@@ -24,11 +24,13 @@ Separate deterministic logic checks from behavior that requires the MCU or physi
 
 ## 3. Build and execute in distinct stages
 
-- Run formatting and compile/check the relevant target and feature configuration first. For example, `cargo test --test example_test --no-run` checks that this template's embedded test target compiles; it does not run tests.
-- To execute target tests, run the appropriate `cargo test` command from a terminal in the Dev Container where `probe-rs` can access the RP2040 probe. The configured `.cargo/config.toml` runner is `probe-rs run --chip RP2040 --protocol swd`.
-- On-device test execution flashes and resets the target. Tell the user before doing this, confirm the intended board is available, and never claim execution if only compilation occurred.
-- The Baker Link Env Agent tools currently expose build tasks, debug-session control/status, and source breakpoints; they do not expose a `cargo test` tool. Do not claim a test was run through those tools. Use an available VS Code task or terminal command, and report if neither is configured.
-- If the probe, board, wiring, or runner is unavailable, finish compile-only checks where possible and mark hardware execution as blocked/unverified rather than silently substituting a host test.
+- Use `bakerInspectProject` to discover packages, target names, and `hostTriple`. Read source/manifest before choosing features and test kind. Do not assume this no_std firmware package can run host tests unchanged.
+- **Host tests:** use `bakerRunTests` with `mode: "host"`, `kind: "lib"`, `"bin"`, or `"test"`, the appropriate package/name, and `targetTriple` equal to the discovered host triple. `name` is required except for `lib`. Optional `testFilter` selects a test-name filter, not arbitrary runner options. Read `success`, `exitCode`, `stdout`, and `stderr`; a host failure is not an MCU test failure.
+- **Embedded compilation:** use `bakerRunTests` with `mode: "embedded-build"`, `kind: "test"`, `name: "example_test"` for this template (or a discovered target), package/features/profile as needed. `kind: "lib"` is also supported for library test harnesses; no `testFilter` is accepted. Omit `targetTriple` to respect the embedded Cargo default. This uses `--no-run` and returns diagnostics and `artifact.artifactId`, not test pass/fail.
+- **Source-level hardware investigation:** pass that artifact ID to `bakerStartDebugging` using `launchWithArtifact` and an existing configuration, or `direct` with explicit hardware conditions. Follow the [Baker Link debug workflow](../baker-link-debug-workflow/SKILL.md). Build or debug launch of a test ELF does not prove its assertions ran or passed; harness-specific result collection is not implemented in extension 0.2.0.
+- Keep the project's `embedded-test` harness. Do not switch to `defmt-test` just to accommodate tool limitations. The template's probe-rs runner line is commented out; do not assume a configured runner or container USB access exists.
+- Baker Link reaches host probe-rs without container probe-rs. Only use a separate terminal-based on-device test runner if the user explicitly chooses that route and its runner, USB access, target, and safety have been verified. Do not use it as an automatic fallback for disconnected/unavailable Agent tools.
+- On-device execution can flash/reset hardware. Wait for approval, and report actual test names/assertion output only if available from a supported runner or user-provided logs. Otherwise finish compile checks and mark hardware test execution/results blocked or unverified, rather than substituting host tests.
 
 ## 4. Diagnose failures with evidence
 
