@@ -81,3 +81,18 @@ An existing container retains its old hosts mapping until recreated.
 Start both host services with **Run** in Baker Link Env, using Bind IP
 `0.0.0.0`, then run **Baker Link: Check Host Connection** in the container.
 Allow the host ports through the firewall only for trusted networks.
+
+## Running embedded tests
+
+The template uses
+[embedded-test](https://github.com/probe-rs/embedded-test) with `probe-rs run`
+as the Cargo target runner. Connect an RP2040 and run the tests from an
+environment where `probe-rs` can access the debug probe:
+
+```sh
+cargo test --test example_test
+```
+
+The `.cargo/config.toml` runner and `build.rs` linker-script setup are already
+configured. `defmt-test` is not needed; `defmt` and `defmt-rtt` remain available
+for logging.

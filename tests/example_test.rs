@@ -9,12 +9,11 @@ use rp2040_hal as _;
 #[used]
 pub static BOOT2: [u8; 256] = rp2040_boot2::BOOT_LOADER_GENERIC_03H;
 
-#[defmt_test::tests]
+#[cfg(test)]
+#[embedded_test::tests]
 mod tests {
-    use defmt::assert;
-
     #[test]
     fn it_works() {
-        assert!(true);
+        assert_eq!(2 + 2, 4);
     }
 }

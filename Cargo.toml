@@ -27,6 +27,7 @@ rp2040-hal = { version = "0.12", features = ["critical-section-impl"] }
 rp2040-boot2 = "0.3"
 critical-section = "1.2"
 fugit = "0.3"
+embedded-test = { version = "0.7", default-features = false, features = ["defmt", "semihosting"] }
 
 # Embassy dependencies (optional, enabled via "embassy" feature)
 embassy-executor = { version = "0.10", features = ["platform-cortex-m", "executor-thread", "defmt"], optional = true }
@@ -34,8 +35,9 @@ embassy-time = { version = "0.5", features = ["defmt"], optional = true }
 embassy-rp = { version = "0.10", features = ["defmt", "rp2040", "time-driver", "critical-section-impl", "boot2-generic-03h"], optional = true }
 embassy-sync = { version = "0.8", features = ["defmt"], optional = true }
 
-[dev-dependencies]
-defmt-test = "0.4"
+[[bin]]
+name = "{{project-name}}"
+test = false
 
 [[test]]
 name = "example_test"
