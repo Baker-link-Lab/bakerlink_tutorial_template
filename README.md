@@ -97,11 +97,10 @@ The `.cargo/config.toml` runner and `build.rs` linker-script setup are already
 configured. `defmt-test` is not needed; `defmt` and `defmt-rtt` remain available
 for logging.
 
-## Agent Skills
+## Agent Skill
 
-This template includes project Agent Skills under `.agents/skills/` for
-embedded I/O bring-up and integration, embedded test design/execution, and
-Baker Link hardware debugging. VS Code discovers skills from this directory.
-They guide the workflow but do not add tools: in particular, Baker Link Agent
-tools do not run `cargo test` or expose target variables/registers. See each
-skill's `SKILL.md` for its procedure and limitations.
+This template includes one [Baker Link Workflow skill](.agents/skills/baker-link-workflow/SKILL.md)
+for basic firmware changes, builds, and hardware debugging.
+VS Code discovers it under `.agents/skills/`. It follows four steps:
+check the project, implement and build, debug, then report the result.
+It does not include a test workflow or expose RTT logs or target variables.
